@@ -22,15 +22,21 @@ func getEnvOrDefault(k string, dv string) string {
 func main() {
 	host := getEnvOrDefault("HOST", "0.0.0.0")
 	port := getEnvOrDefault("PORT", "8000")
+	pathPrefix := getEnvOrDefault("PATH_PREFIX", "/")
 
 	addr := fmt.Sprintf("%s:%s", host, port)
-	fmt.Println("service listening on: http://" + addr)
+	fmt.Println("service listening on: http://" + addr + pathPrefix)
 
 	// https://github.com/gorilla/mux
 	r := mux.NewRouter()
-	r.HandleFunc("/hc", controllers.HcController)
-	r.HandleFunc("/reflect", controllers.ReflectController)
-	r.HandleFunc("/", controllers.RootController)
+
+	s := r.PathPrefix(pathPrefix).Subrouter()
+
+	s.HandleFunc("/hc", controllers.HcController)
+	s.HandleFunc("/reflect", controllers.ReflectController)
+
+	s.HandleFunc("/", controllers.RootController)
+	s.HandleFunc("", controllers.RootController)
 
 	srv := &http.Server{
 		Handler: r,
