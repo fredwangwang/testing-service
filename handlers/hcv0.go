@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 
 var hcStatusCode = 200
 
-func HcController(w http.ResponseWriter, r *http.Request) {
+func HcV0(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		w.Header().Set("testing-key", "testing-val")
 		w.WriteHeader(hcStatusCode)

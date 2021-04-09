@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"fredwangwang/testing-service/controllers"
+	"fredwangwang/testing-service/handlers"
 	"log"
 	"net/http"
 	"os"
@@ -32,11 +32,12 @@ func main() {
 
 	s := r.PathPrefix(pathPrefix).Subrouter()
 
-	s.HandleFunc("/hc", controllers.HcController)
-	s.HandleFunc("/reflect", controllers.ReflectController)
+	s.HandleFunc("/v0/hc", handlers.HcV0)
+	s.PathPrefix("/v0/reflect").HandlerFunc(handlers.ReflectV0)
+	s.HandleFunc("/v0/control", handlers.ControlV0)
 
-	s.HandleFunc("/", controllers.RootController)
-	s.HandleFunc("", controllers.RootController)
+	s.HandleFunc("/", handlers.Root)
+	s.HandleFunc("", handlers.Root)
 
 	srv := &http.Server{
 		Handler: r,

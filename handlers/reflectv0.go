@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"fmt"
@@ -6,8 +6,7 @@ import (
 	"net/http"
 )
 
-
-func ReflectController(w http.ResponseWriter, r *http.Request) {
+func ReflectV0(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 
 	w.Write(b("Method:"))
