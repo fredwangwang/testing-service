@@ -35,6 +35,7 @@ func main() {
 	s.HandleFunc("/v0/hc", handlers.HcV0)
 	s.PathPrefix("/v0/reflect").HandlerFunc(handlers.ReflectV0)
 	s.HandleFunc("/v0/control", handlers.ControlV0)
+	s.HandleFunc("/v0/fib/{fib}", handlers.Fib)
 
 	s.HandleFunc("/", handlers.Root)
 	s.HandleFunc("", handlers.Root)
