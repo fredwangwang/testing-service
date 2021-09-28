@@ -1,5 +1,5 @@
 # testing-service
-A Micro service useful for testing, docker: https://hub.docker.com/repository/docker/fredwanghuan/testing-service
+A Micro service useful for testing, docker: https://hub.docker.com/r/fredwanghuan/testing-service
 
 
 ## Endpoints
